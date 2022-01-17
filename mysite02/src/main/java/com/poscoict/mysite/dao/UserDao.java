@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import com.mysql.cj.protocol.Resultset;
 import com.poscoict.mysite.vo.UserVo;
 
+import dao.MySQL;
+import vo.BoardVO;
+
 public class UserDao {
 	public boolean insert(UserVo vo) {
 		boolean result = true;
@@ -35,6 +38,7 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()){
 				result_vo= UserVo.builder()
+						.no(rs.getInt("no"))
 						.name(rs.getString("name"))
 						.email(rs.getString("email"))
 						.password(rs.getString("password"))
@@ -48,5 +52,46 @@ public class UserDao {
 		}
 		ConnectionDB.close(conn);
 		return result_vo;
+	}
+	
+
+	public UserVo findByNo(int no) {
+		UserVo result_vo = null;
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement("select * from user where no=?");){
+			pstmt.setInt(1,no);
+	
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()){
+				result_vo= UserVo.builder()
+						.no(rs.getInt("no"))
+						.name(rs.getString("name"))
+						.email(rs.getString("email"))
+						.password(rs.getString("password"))
+						.gender(rs.getString("gender"))
+						.join_date("join_date")
+						.build();
+			}
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		ConnectionDB.close(conn);
+		return result_vo;
+	}
+	
+	
+	public boolean update(UserVo vo) {
+		boolean result = true;
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement(
+						"UPDATE `webdb`.`user` SET `email` = 'kwonsoonmo2@na1ver.com', `password` = ?, `gender` = ?,  WHERE (`no` = ?););");){
+			pstmt.executeUpdate();			
+		}catch(SQLException e){
+			result = false;
+			e.printStackTrace();
+		}
+		ConnectionDB.close(conn);
+		return result;
 	}
 }

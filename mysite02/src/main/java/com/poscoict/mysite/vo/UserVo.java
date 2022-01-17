@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserVo {
+	int no;
 	String name;
 	String password;
 	String email;
