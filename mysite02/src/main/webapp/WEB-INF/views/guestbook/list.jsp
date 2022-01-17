@@ -1,3 +1,4 @@
+<%@page import="com.poscoict.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <%@ page import = "com.poscoict.mysite.vo.GuestbookVO, java.util.ArrayList, com.poscoict.mysite.dao.guest_dao" %> 
 <!DOCTYPE html>
@@ -10,6 +11,7 @@
 <body>
 	<% 
 	ArrayList<GuestbookVO> volist = (ArrayList<GuestbookVO>)request.getAttribute("list");
+	UserVo vo  =  (UserVo)session.getAttribute("authvo");
 	%>
    <div id="container">
      <jsp:include page="/WEB-INF/views/include/header.jsp" />
@@ -19,8 +21,8 @@
                <input type="hidden" name="a" value="insert">
                <table>
                   <tr>
-                     <td>이름</td><td><input type="text" name="name"></td>
-                     <td>비밀번호</td><td><input type="password" name="password"></td>
+                     <td>이름</td><td><input type="text" name="name" value="<%=vo!=null?vo.getName():"" %>"></td>
+                     <td>비밀번호</td><td><input type="password" name="password" value="<%=vo!=null?vo.getPassword():"" %>"></td>
                   </tr>
                   <tr>
                      <td colspan=4><textarea name="message" id="content"></textarea></td>

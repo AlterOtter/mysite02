@@ -39,4 +39,14 @@
     <servlet-name>guest</servlet-name>
     <url-pattern>/guest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>board</display-name>
+    <servlet-name>board</servlet-name>
+    <servlet-class>com.poscoict.mysite.controller.BoardController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>board</servlet-name>
+    <url-pattern>/board</url-pattern>
+  </servlet-mapping>
 </web-app>

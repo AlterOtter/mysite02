@@ -20,14 +20,13 @@ public class UserController extends HttpServlet {
 		String actionName = req.getParameter("a");
 		
 		ActionFactory af = new UserActionFactory();
-		Action action = new UserActionFactory().getAction(actionName);
+		Action action = af.getAction(actionName);
 		action.execute(req,res);
 	}
 
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
-	
+		doGet(req,res);
 	}
 
 }

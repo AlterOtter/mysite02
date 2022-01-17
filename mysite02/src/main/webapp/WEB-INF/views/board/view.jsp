@@ -8,16 +8,7 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">ë¡ê·¸ì¸</a><li>
-				<li><a href="">íìê°ì</a><li>
-				<li><a href="">íìì ë³´ìì </a><li>
-				<li><a href="">ë¡ê·¸ìì</a><li>
-				<li>ë ìëíì¸ì ^^;</li>
-			</ul>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board" class="board-form">
 				<table class="tbl-ex">
@@ -40,8 +31,8 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<a href="<%=request.getContextPath() %>/board">글목록</a>
+					<a href="<%=request.getContextPath() %>/board?a=modifyform">글수정</a>
 				</div>
 			</div>
 		</div>

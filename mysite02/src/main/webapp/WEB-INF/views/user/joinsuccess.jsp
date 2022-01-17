@@ -8,35 +8,18 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">ë¡ê·¸ì¸</a><li>
-				<li><a href="">íìê°ì</a><li>
-				<li><a href="">íìì ë³´ìì </a><li>
-				<li><a href="">ë¡ê·¸ìì</a><li>
-				<li>ë ìëíì¸ì ^^;</li>
-			</ul>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="user">
 				<p class="jr-success">
-					íìê°ìì ì¶íí©ëë¤.
+					회원가입을 축하합니다.
 					<br><br>
-					<a href="/user?a=loginform">ë¡ê·¸ì¸íê¸°</a>
+					<a href="<%=request.getContextPath() %>/user?a=loginform">로그인하기</a>
 				</p>				
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">ìëí</a></li>
-				<li><a href="">ë°©ëªë¡</a></li>
-				<li><a href="">ê²ìí</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/nav.jsp" />
+		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	</div>
 </body>
 </html>
