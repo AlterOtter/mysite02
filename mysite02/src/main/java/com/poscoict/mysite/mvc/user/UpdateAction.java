@@ -17,22 +17,29 @@ public class UpdateAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws SecurityException, IOException, ServletException {
+		HttpSession sess= request.getSession();
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String gender = request.getParameter("gender");
 		int no =  Integer.parseInt(request.getParameter("no"));
-	
-		UserVo vo = UserVo.builder().name(name).email(email).gender(gender).no(no).build();
-		System.out.println(vo.toString());
-		if(new UserDao().update(vo)) {
-			HttpSession sess= request.getSession();
-			sess.removeAttribute("authvo");
-			sess.setAttribute("authvo", vo);
-			MvcUtil.redirect("/mysite02/main", request, response);
+		String password = request.getParameter("password");
+		
+		
+		UserVo vo = UserVo.builder().name(name).email(email).gender(gender).no(no).password(password).build();
+		
+		if(password.isBlank()) {
+			new UserDao().update(vo);
 		}else {
-			MvcUtil.redirect("/mysite02/main", request, response);
+			new UserDao().updateWithPassword(vo);
 		}
-
+		
+		UserVo authvo = new UserDao().findByNo(no);
+		
+		
+		sess.setAttribute("authvo", authvo);
+		
+		
+		MvcUtil.redirect("/mysite02/main", request, response);
 	}
 
 }

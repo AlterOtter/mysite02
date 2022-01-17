@@ -80,6 +80,8 @@ public class UserDao {
 	
 	public boolean update(UserVo vo) {
 		boolean result = true;
+		System.out.println("dao"+vo.getGender());
+		
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement(
 						"UPDATE `webdb`.`user` SET `name` = ?, `email` = ?, `gender` = ? WHERE (`no` = ?);");){
@@ -87,6 +89,27 @@ public class UserDao {
 			pstmt.setString(2, vo.getEmail());
 			pstmt.setString(3, vo.getGender());
 			pstmt.setInt(4,vo.getNo());
+			pstmt.executeUpdate();			
+		}catch(SQLException e){
+			result = false;
+			e.printStackTrace();
+		}
+		ConnectionDB.close(conn);
+		return result;
+	}
+	
+	public boolean updateWithPassword(UserVo vo) {
+		boolean result = true;
+		System.out.println("dao"+vo.getGender());
+		
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement(
+						"UPDATE `webdb`.`user` SET `name` = ?, `email` = ?, `gender` = ?,`password` =?  WHERE (`no` = ?);");){
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setString(4, vo.getPassword());
+			pstmt.setInt(5,vo.getNo());
 			pstmt.executeUpdate();			
 		}catch(SQLException e){
 			result = false;
