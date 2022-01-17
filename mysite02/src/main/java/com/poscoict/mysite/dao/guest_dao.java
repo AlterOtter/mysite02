@@ -16,7 +16,7 @@ public class guest_dao {
 		try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO `webdb`.`guestbook` (`name`, `password`, `message`, `reg_date`) VALUES (?, ?, ?, now());");){
 			pstmt.setString(1,vo.getName());
 			pstmt.setString(2,vo.getPassword());
-			pstmt.setString(3,vo.getReg_date());
+			pstmt.setString(3,vo.getMessage());
 			pstmt.executeUpdate();			
 		}catch(SQLException e){
 			result = false;
@@ -54,8 +54,6 @@ public class guest_dao {
 		boolean result = true;
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement("DELETE FROM `webdb`.`guestbook` WHERE (`no` = ? and `password`=?);");){
-			System.out.println("no : "+vo.getNo());
-			System.out.println("password : "+vo.getPassword());
 			pstmt.setInt(1, vo.getNo());
 			pstmt.setString(2, vo.getPassword());
 			pstmt.executeUpdate();	

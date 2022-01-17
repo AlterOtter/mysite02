@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import com.mysql.cj.protocol.Resultset;
 import com.poscoict.mysite.vo.UserVo;
 
-import dao.MySQL;
-import vo.BoardVO;
 
 public class UserDao {
 	public boolean insert(UserVo vo) {
@@ -67,7 +65,6 @@ public class UserDao {
 						.no(rs.getInt("no"))
 						.name(rs.getString("name"))
 						.email(rs.getString("email"))
-						.password(rs.getString("password"))
 						.gender(rs.getString("gender"))
 						.join_date("join_date")
 						.build();
@@ -85,7 +82,11 @@ public class UserDao {
 		boolean result = true;
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement(
-						"UPDATE `webdb`.`user` SET `email` = 'kwonsoonmo2@na1ver.com', `password` = ?, `gender` = ?,  WHERE (`no` = ?););");){
+						"UPDATE `webdb`.`user` SET `name` = ?, `email` = ?, `gender` = ? WHERE (`no` = ?);");){
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setInt(4,vo.getNo());
 			pstmt.executeUpdate();			
 		}catch(SQLException e){
 			result = false;

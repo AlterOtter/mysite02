@@ -9,9 +9,9 @@
 <body>
 	<div id="navigation">
 			<ul>
-				<li><a href="<%=request.getContextPath() %>/main">권순모</a></li>
-				<li><a href="<%=request.getContextPath() %>/guest">방명록</a></li>
-				<li><a href="<%=request.getContextPath() %>/board">게시판</a></li>
+				<li><a href="${pageContext.request.contextPath}/main">권순모</a></li>
+				<li><a href="${pageContext.request.contextPath}/guest">방명록</a></li>
+				<li><a href="${pageContext.request.contextPath}/board">게시판</a></li>
 			</ul>
 		</div>
 </body>

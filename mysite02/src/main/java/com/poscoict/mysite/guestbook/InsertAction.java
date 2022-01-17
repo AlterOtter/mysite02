@@ -20,9 +20,6 @@ public class InsertAction implements Action {
 		String name = (String)request.getParameter("name");
 		String password = (String)request.getParameter("password");
 		String message = (String)request.getParameter("message");
-		System.out.println(name);
-		System.out.println(password);
-		System.out.println(message);
 		dao.insert(GuestbookVO.builder().name(name).password(password).message(message).build());
 	
 		

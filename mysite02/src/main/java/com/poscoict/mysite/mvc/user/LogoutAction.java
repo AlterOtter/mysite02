@@ -17,7 +17,7 @@ public class LogoutAction implements Action {
 		HttpSession sess=request.getSession();
 		sess.removeAttribute("authvo");
 		sess.invalidate();
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/main");
 	}
 
 }

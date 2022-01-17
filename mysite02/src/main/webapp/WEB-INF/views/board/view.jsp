@@ -4,7 +4,7 @@
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="<%=request.getContextPath() %>/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -31,8 +31,8 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="<%=request.getContextPath() %>/board">글목록</a>
-					<a href="<%=request.getContextPath() %>/board?a=modifyform">글수정</a>
+					<a href="${pageContext.request.contextPath}/board">글목록</a>
+					<a href="${pageContext.request.contextPath}/board?a=modifyform">글수정</a>
 				</div>
 			</div>
 		</div>

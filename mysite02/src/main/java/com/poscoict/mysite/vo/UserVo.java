@@ -2,7 +2,9 @@ package com.poscoict.mysite.vo;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 @Getter
 @Builder
 public class UserVo {
