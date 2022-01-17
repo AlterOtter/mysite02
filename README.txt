@@ -281,4 +281,10 @@ for문
 		로그인에 실패하셨습니다.
 	</c:if>
   </p>
+  
+ //=============================================================================
+  ReplaceAll 사용법
+  <% pageContext.setAttribute("newLine", "\n"); %>
+  ${fn:replace(vo.message,newLine,"<br/>")}
+                     	
         

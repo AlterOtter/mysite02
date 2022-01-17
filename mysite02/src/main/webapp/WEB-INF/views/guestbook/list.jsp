@@ -42,7 +42,8 @@
                      </tr>
                      <tr>
                         <td colspan=4>
-                     	${vo.message}
+                       <% pageContext.setAttribute("newLine", "\n"); %>
+                     	${fn:replace(vo.message,newLine,"<br/>")}
                         </td>
                      </tr>
                   </table>
