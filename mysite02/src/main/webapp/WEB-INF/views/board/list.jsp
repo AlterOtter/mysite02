@@ -8,16 +8,7 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>MySite</h1>
-			<ul>
-				<li><a href="">ë¡ê·¸ì¸</a><li>
-				<li><a href="">íìê°ì</a><li>
-				<li><a href="">íìì ë³´ìì </a><li>
-				<li><a href="">ë¡ê·¸ìì</a><li>
-				<li>ë ìëíì¸ì ^^;</li>
-			</ul>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
@@ -26,53 +17,45 @@
 				</form>
 				<table class="tbl-ex">
 					<tr>
-						<th>ë²í¸</th>
-						<th>ì ëª©</th>
-						<th>ê¸ì´ì´</th>
-						<th>ì¡°íì</th>
-						<th>ìì±ì¼</th>
+						<th>번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>조회수</th>
+						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>				
 					<tr>
 						<td>3</td>
-						<td><a href="">ì¸ ë²ì§¸ ê¸ìëë¤.</a></td>
-						<td>ìëí</td>
+						<td><a href="">세 번째 글입니다.</a></td>
+						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">ì­ì </a></td>
+						<td><a href="" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td><a href="">ë ë²ì§¸ ê¸ìëë¤.</a></td>
-						<td>ìëí</td>
+						<td><a href="">두 번째 글입니다.</a></td>
+						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">ì­ì </a></td>
+						<td><a href="" class="del">삭제</a></td>
 					</tr>
 					<tr>
 						<td>1</td>
-						<td><a href="">ì²« ë²ì§¸ ê¸ìëë¤.</a></td>
-						<td>ìëí</td>
+						<td><a href="">첫 번째 글입니다.</a></td>
+						<td>안대혁</td>
 						<td>3</td>
 						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">ì­ì </a></td>
+						<td><a href="" class="del">삭제</a></td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="" id="new-book">ê¸ì°ê¸°</a>
+					<a href="" id="new-book">글쓰기</a>
 				</div>				
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">ìëí</a></li>
-				<li><a href="">ë°©ëªë¡</a></li>
-				<li><a href="">ê²ìí</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/nav.jsp"/>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	</div>
 </body>
 </html>

@@ -33,16 +33,7 @@ public class GuestBookController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		String actionName = req.getParameter("a");
-		
-		ActionFactory af = new GuestbookActionFactory();
-		try {
-			Action action = af.getAction(actionName);
-			action.execute(req,res);
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+		doGet(req, res);
 	}
 
 }

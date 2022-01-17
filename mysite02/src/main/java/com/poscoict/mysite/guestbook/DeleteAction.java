@@ -17,7 +17,7 @@ public class DeleteAction implements Action {
 			throws SecurityException, IOException, ServletException {
 		int no = Integer.parseInt(request.getParameter("no"));
 		String password =(String)request.getParameter("password");
-		dao.delete(GuestbookVO.Builder().no(no).password(password).build());
+		dao.delete(GuestbookVO.builder().no(no).password(password).build());
 		response.sendRedirect("/mysite02/guest");
 
 	}

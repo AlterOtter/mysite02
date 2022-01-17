@@ -23,7 +23,7 @@ public class InsertAction implements Action {
 		System.out.println(name);
 		System.out.println(password);
 		System.out.println(message);
-		dao.insert(GuestbookVO.Builder().name(name).password(password).message(message).build());
+		dao.insert(GuestbookVO.builder().name(name).password(password).message(message).build());
 	
 		
 		MvcUtil.redirect("http://localhost:8080/mysite02/guest",request,response);

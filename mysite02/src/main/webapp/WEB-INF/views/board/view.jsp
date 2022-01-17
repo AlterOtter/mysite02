@@ -22,39 +22,31 @@
 			<div id="board" class="board-form">
 				<table class="tbl-ex">
 					<tr>
-						<th colspan="2">ê¸ë³´ê¸°</th>
+						<th colspan="2">글보기</th>
 					</tr>
 					<tr>
-						<td class="label">ì ëª©</td>
-						<td>ì ëª©ìëë¤.</td>
+						<td class="label">제목</td>
+						<td>제목입니다.</td>
 					</tr>
 					<tr>
-						<td class="label">ë´ì©</td>
+						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								ë´ì© 1ìëë¤.<br>
-								ë´ì© 2ìëë¤.<br>
-								ë´ì© 3ìëë¤.
+								내용 1입니다.<br>
+								내용 2입니다.<br>
+								내용 3입니다.
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="">ê¸ëª©ë¡</a>
-					<a href="">ê¸ìì </a>
+					<a href="">글목록</a>
+					<a href="">글수정</a>
 				</div>
 			</div>
 		</div>
-		<div id="navigation">
-			<ul>
-				<li><a href="">ìëí</a></li>
-				<li><a href="">ë°©ëªë¡</a></li>
-				<li><a href="">ê²ìí</a></li>
-			</ul>
-		</div>
-		<div id="footer">
-			<p>(c)opyright 2015, 2016, 2017, 2018</p>
-		</div>
+		<jsp:include page="/WEB-INF/views/include/nav.jsp"/>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	</div>
 </body>
 </html>

@@ -14,9 +14,9 @@ public class guest_dao {
 		boolean result = true;
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO `webdb`.`guestbook` (`name`, `password`, `message`, `reg_date`) VALUES (?, ?, ?, now());");){
-			pstmt.setString(1,vo.getname());
-			pstmt.setString(2,vo.getpassword());
-			pstmt.setString(3,vo.getmessage());
+			pstmt.setString(1,vo.getName());
+			pstmt.setString(2,vo.getPassword());
+			pstmt.setString(3,vo.getReg_date());
 			pstmt.executeUpdate();			
 		}catch(SQLException e){
 			result = false;
@@ -34,7 +34,7 @@ public class guest_dao {
 		try (PreparedStatement pstmt = conn.prepareStatement("select * from guestbook order by no desc;");){
 			ResultSet rs=pstmt.executeQuery();	
 			while(rs.next()) {
-				GuestbookVO vo = GuestbookVO.Builder()
+				GuestbookVO vo = GuestbookVO.builder()
 						.no(rs.getInt("no"))
 						.name(rs.getString("name"))
 						.password(rs.getString("password"))
@@ -55,9 +55,9 @@ public class guest_dao {
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement("DELETE FROM `webdb`.`guestbook` WHERE (`no` = ? and `password`=?);");){
 			System.out.println("no : "+vo.getNo());
-			System.out.println("password : "+vo.getpassword());
+			System.out.println("password : "+vo.getPassword());
 			pstmt.setInt(1, vo.getNo());
-			pstmt.setString(2, vo.getpassword());
+			pstmt.setString(2, vo.getPassword());
 			pstmt.executeUpdate();	
 			
 		}catch(SQLException e){
