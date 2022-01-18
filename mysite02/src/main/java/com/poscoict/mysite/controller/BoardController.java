@@ -20,12 +20,10 @@ public class BoardController extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String actionName = req.getParameter("a");
 		ActionFactory af = new BoardActionFactory();
-		try {
-			Action action = af.getAction(actionName);
-			action.execute(req,res);
-		}catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
+		
+		Action action = af.getAction(actionName);
+		action.execute(req,res);
+		
 	}
 
 	

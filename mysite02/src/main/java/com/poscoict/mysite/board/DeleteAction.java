@@ -10,23 +10,17 @@ import com.poscoict.mysite.dao.BoardDao;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
-public class ViewformAction implements Action {
+public class DeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws SecurityException, IOException, ServletException {
-		String board_num = request.getParameter("board_sn");
-		if(board_num==null) {
-			MvcUtil.redirect("/mysite02/board", request, response);
-			return;
-		}
+		Integer no = Integer.valueOf(request.getParameter("no"));
+		Integer mem_no = Integer.valueOf(request.getParameter("mem_no"));
 		
-		Integer sn = Integer.valueOf(board_num);
-		request.setAttribute("content", new BoardDao().readContent(sn));
+		new BoardDao().DeleteOne(no);
 		
-		
-		
-		MvcUtil.forward("board/view.jsp", request, response);
+		MvcUtil.redirect("/mysite02/board", request, response);
 
 	}
 

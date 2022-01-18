@@ -286,5 +286,55 @@ for문
   ReplaceAll 사용법
   <% pageContext.setAttribute("newLine", "\n"); %>
   ${fn:replace(vo.message,newLine,"<br/>")}
-                     	
+  
+  //=======================================================================
+  Filter 
+  Listener 
+  Cookie
+  int visitCount =0;
+  Cookie[] cookies = request.getCookies();
+  if(cookies !=null && cookies.length >0){
+  	for(Cookie cookie:cookies){
+  	  if("visitcount".equals(cookie.getName()){
+  	  	visitCount=Integer.parseInt(cookie.getValue());
+  	  	break;
+  	  }
+  	}
+  }
+  visitCount++;  
+  Cookie cookie =new Cookie(COOKIE_NAME,String.valueof(visitcount));
+  cookie.setPath(request.getContextPath());
+  cookie.setMaxAge(24*60*60);
+  response.addCookie(cookie);
+  
+  response.setContentType("text/html;charset=utf-8");
+  PrintWriter out = response.getWriter();
+  out.print("방문횟수"+visitcount);                
+  
+  
+  //===============================================================================
+  <tr>
+	<td>3</td>
+	<td style="text-align:left"><a href="/mysite02/board?a=viewform">세 번째 글입니다.</a></td>
+	<td>안대혁</td>
+	<td>3</td>
+	<td>2015-10-11 12:04:20</td>
+	<td><a href="" class="del">삭제</a></td>
+</tr>
+					<tr>
+						<td>2</td>
+						<td style="padding-left:20px"><a href="/mysite02/board?a=viewform"><img id="profile" style="width:20px" src="/mysite02/assets/images/arrow.png">두 번째 글입니다.</a></td>
+						<td>안대혁</td>
+						<td>3</td>
+						<td>2015-10-02 12:04:12</td>
+						<td><a href="" class="del">삭제</a></td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td style="text-align:left"><a href="/mysite02/board?a=viewform">첫 번째 글입니다.</a></td>
+						<td>안대혁</td>
+						<td>3</td>
+						<td>2015-09-25 07:24:32</td>
+						<td><a href="" class="del">삭제</a></td>
+					</tr>	
         

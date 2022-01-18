@@ -15,7 +15,6 @@ public class WriteformAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws SecurityException, IOException, ServletException {
 		MvcUtil.forward("board/write.jsp", request, response);
-
 	}
 
 }

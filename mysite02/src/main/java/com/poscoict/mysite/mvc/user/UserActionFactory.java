@@ -1,5 +1,6 @@
 package com.poscoict.mysite.mvc.user;
 
+import com.poscoict.mysite.board.WriteAction;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.mvc.ActionFactory;
 
