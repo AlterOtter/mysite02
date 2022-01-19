@@ -76,10 +76,11 @@
 				</c:forEach>
 					</ul>
 				</div>
-					
-				<div class="bottom">
-					<a href="/mysite02/board?a=writeform" id="new-book">글쓰기</a>
-				</div>				
+				<c:if test="${null ne authvo}">
+					<div class="bottom">
+						<a href="/mysite02/board?a=writeform" id="new-book">글쓰기</a>
+					</div>
+				</c:if>				
 			</div>
 		</div>
 		

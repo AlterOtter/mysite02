@@ -12,7 +12,6 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
-					<input type="text" name="no" value="${authvo.no}">
 					<input type = "hidden" name = "a" value="write">
 					<table class="tbl-ex">
 						<tr>

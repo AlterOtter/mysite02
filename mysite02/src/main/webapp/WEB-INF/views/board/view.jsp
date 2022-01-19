@@ -82,9 +82,14 @@
 					</c:choose>
 				 </div>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath}/board?a=replyform&no=${content.no}">답글달기</a>
+				<!-- 답글 달기 -->
+					<c:if test="${null ne authvo}">
+						<a href="${pageContext.request.contextPath}/board?a=replyform&no=${content.no}">답글달기</a>
+					</c:if>
 					<a href="${pageContext.request.contextPath}/board">글목록</a>
-					<a href="${pageContext.request.contextPath}/board?a=modifyform&no=${content.no}">글수정</a>
+					<c:if test="${content.userVo.no eq authvo.no}">
+						<a href="${pageContext.request.contextPath}/board?a=modifyform&no=${content.no}">글수정</a>
+					</c:if>
 				</div>
 			</div>
 		</div>
