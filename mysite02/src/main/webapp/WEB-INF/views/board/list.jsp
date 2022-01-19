@@ -30,13 +30,14 @@
 					</tr>
 					<c:forEach items="${list}" var="vo"  varStatus="status" >				
 					<tr>
-						<td>${vo.no}</td>
+						<td>${cnt-(page-1)*10-(status.count-1)}</td>
 						<c:choose>
 							<c:when test="${1 eq vo.depth}">
 								<td style="text-align:left;padding-left:0">
 									<a href="/mysite02/board?a=viewform&board_sn=${vo.no}">${vo.title}</a>
 								</td>	
 							</c:when>
+							
 							<c:otherwise>
 							<td style="text-align:left;padding-left:${20*vo.depth}px">
 								<a href="/mysite02/board?a=viewform&board_sn=${vo.no}">
@@ -57,15 +58,31 @@
 						</c:if>
 					</tr>
 					</c:forEach>
-				</table>
+				</table>		
+				<div class="pager">
+					<ul>
 				<c:forEach items="${pages}" var="page" varStatus="status">
-					<a href="${page}">${status.count}</a>
+					<c:choose>
+						<c:when test="${param.page eq status.count}">
+							<li class="selected"><a href="${page}">${status.count}</a></li>
+						</c:when>
+						<c:when test="${null eq param.page&& status.count eq 1}">
+							<li class="selected"><a href="${page}">${status.count}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="${page}">${status.count}</a></li>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
+					</ul>
+				</div>
+					
 				<div class="bottom">
 					<a href="/mysite02/board?a=writeform" id="new-book">글쓰기</a>
 				</div>				
 			</div>
 		</div>
+		
 		<jsp:include page="/WEB-INF/views/include/nav.jsp"/>
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	</div>

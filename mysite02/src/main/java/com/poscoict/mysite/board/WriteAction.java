@@ -3,15 +3,18 @@ package com.poscoict.mysite.board;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.poscoict.mysite.config.ConfigMysite;
 import com.poscoict.mysite.dao.BoardDao;
 import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.mysite.vo.UserVo;
 import com.poscoict.web.mvc.Action;
 import com.poscoict.web.util.MvcUtil;
 
+@MultipartConfig(location = ConfigMysite.IMG_PATH)
 public class WriteAction implements Action {
 
 	@Override
@@ -28,7 +31,7 @@ public class WriteAction implements Action {
 		BoardVo vo = BoardVo.builder().title(title).contents(content).groupNo(group_num).orderNo(o_no).depth(depth).hit(hit).userVo(UserVo.builder().no(mem_sn).build()).build();
 		new BoardDao().insertNewContent(vo);
 		
-		
+		//이미지 저장하는 기능 
 		
 		
 		MvcUtil.redirect("/mysite02/board", request, response);

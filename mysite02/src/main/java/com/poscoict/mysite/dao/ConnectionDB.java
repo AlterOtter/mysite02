@@ -3,14 +3,16 @@ package com.poscoict.mysite.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.poscoict.mysite.config.ConfigMysite;
+
 public class ConnectionDB {
 	public static Connection connect() {
 		Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); 
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC";
-			String user = "webdb";
-			String passwd = "webdb";
+			String url = ConfigMysite.URL;
+			String user =  ConfigMysite.USER;
+			String passwd =  ConfigMysite.PASSWORD;
 			conn = DriverManager.getConnection(url, user, passwd);						
 		}catch (Exception e) {
 			System.out.println("MYSQL 연결 실패");

@@ -18,14 +18,14 @@ public class SearchAction implements Action{
 		String input_value= request.getParameter("input");
 		String str = request.getParameter("page");
 		int pagenum = 1;
-		
 		if(str==null) {
 			request.setAttribute("list", new BoardDao().SerachList(input_value,pagenum));  
 		}else{
 			pagenum = Integer.parseInt(str);
 			request.setAttribute("list", new BoardDao().SerachList(input_value,pagenum));  
 		}
-		
+		request.setAttribute("page", pagenum);
+		request.setAttribute("cnt", new BoardDao().searchCount(input_value));
 		request.setAttribute("pages", new BoardDao().searchpageCount(input_value));
 		MvcUtil.forward("board/list.jsp", request, response);
 		

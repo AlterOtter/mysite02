@@ -24,7 +24,8 @@ public class BoardAction implements Action{
 			pagenum = Integer.parseInt(str);
 			request.setAttribute("list", new BoardDao().SelectList(pagenum));  
 		}
-		
+		request.setAttribute("page", pagenum);
+		request.setAttribute("cnt", new BoardDao().searchCount(""));
 		request.setAttribute("pages", new BoardDao().pageCount());
 		MvcUtil.forward("board/list.jsp", request, response);
 		

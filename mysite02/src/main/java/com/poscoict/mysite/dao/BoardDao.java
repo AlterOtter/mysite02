@@ -266,7 +266,7 @@ public class BoardDao {
 				}
 				
 				for(int i=1;i<resultCount+1;i++) {
-					list.add("/mysite02/board?a=serach&page="+i+"&input="+input);
+					list.add("/mysite02/board?a=search&page="+i+"&input="+input);
 				}
 			}
 		}catch(Exception e){
@@ -276,6 +276,21 @@ public class BoardDao {
 		return list;
 	}
 
+	public Integer searchCount(String input) {
+		Integer pageCount=0;
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement("select count(*) as count from board where title like '%"+input+"%' or contents like '%"+input+"%';");){
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pageCount = rs.getInt("count");
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		ConnectionDB.close(conn);
+		return pageCount;
+	}
 
 	public boolean updateOne(BoardVo vo) {
 		boolean result = true;
