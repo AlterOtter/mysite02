@@ -49,7 +49,12 @@
 						<td>${vo.userName}</td>
 						<td>${vo.hit}</td>
 						<td>${vo.regDate}</td>
-						<td><a href="${pageContext.servletContext.contextPath}/board?a=delete&no=${vo.no}" class="del"  style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
+						<c:if test="${null ne authvo}">
+							<c:set var="no" value="${authvo.no}"/>
+							<c:if test="${vo.userVo.no eq authvo.no}">
+								<td><a href="${pageContext.servletContext.contextPath}/board?a=delete&no=${vo.no}" class="del"  style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
+							</c:if>
+						</c:if>
 					</tr>
 					</c:forEach>
 				</table>

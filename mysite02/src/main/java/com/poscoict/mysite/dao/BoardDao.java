@@ -11,6 +11,7 @@ import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.mysite.vo.GuestbookVO;
 import com.poscoict.mysite.vo.UserVo;
 
+
 public class BoardDao {
 	
 	public List<BoardVo> SelectList(int pagenum) {
@@ -20,7 +21,7 @@ public class BoardDao {
 		Connection conn = ConnectionDB.connect();
 		try (PreparedStatement pstmt = conn.prepareStatement("select b.no as "
 				+ "'no',b.title as 'title',u.name as 'name' ,b.reg_date as "
-				+ "'reg_date',g_no,o_no,depth,hit  from board as b join user as u"
+				+ "'reg_date',g_no,o_no,depth,hit,user_no  from board as b join user as u"
 				+ " on b.user_no=u.no order by g_no,o_no limit ?,10");){
 			pstmt.setInt(1, pagenum);
 			ResultSet rs = pstmt.executeQuery();
@@ -34,6 +35,7 @@ public class BoardDao {
 						.orderNo(rs.getInt("o_no"))
 						.depth(rs.getInt("depth"))
 						.regDate(rs.getString("reg_date"))
+						.userVo(UserVo.builder().no(rs.getInt("user_no")).build())
 						.build();				
 				
 				list.add(vo);
@@ -202,7 +204,19 @@ public class BoardDao {
 		return result;
 	}
 
-	
+	public boolean addViewCount(int bd_sn) {
+		boolean result = false;
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement("update board as bd set bd.hit=IFNULL(bd.hit,0)+1 where no =?;")) {
+			pstmt.setInt(1, bd_sn);
+			pstmt.executeUpdate();		
+			result = true;
+		} catch (SQLException se) {
+			System.out.println(se.getMessage());
+		}
+		ConnectionDB.close(conn);
+		return result;
+	}	
 	
 	// 검색 기능 관련 ㅋㅋ
 	public List<BoardVo> SerachList(String input,Integer pagenum){
@@ -261,4 +275,24 @@ public class BoardDao {
 		ConnectionDB.close(conn);
 		return list;
 	}
+
+
+	public boolean updateOne(BoardVo vo) {
+		boolean result = true;
+		Connection conn = ConnectionDB.connect();
+		try (PreparedStatement pstmt = conn.prepareStatement("UPDATE `webdb`.`board` SET `title` = ?, `contents` = ? WHERE (`no` = ?);");){
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setInt(3,vo.getNo());
+			pstmt.executeUpdate();			
+		}catch(SQLException e){
+			result = false;
+			e.printStackTrace();
+		}
+		ConnectionDB.close(conn);
+		return result;
+		
+	}
+	
+	
 }

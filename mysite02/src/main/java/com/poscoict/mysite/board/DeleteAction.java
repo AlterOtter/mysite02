@@ -16,7 +16,6 @@ public class DeleteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws SecurityException, IOException, ServletException {
 		Integer no = Integer.valueOf(request.getParameter("no"));
-		Integer mem_no = Integer.valueOf(request.getParameter("mem_no"));
 		
 		new BoardDao().DeleteOne(no);
 		
