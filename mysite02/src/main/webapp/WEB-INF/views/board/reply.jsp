@@ -12,7 +12,7 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
-					<input type="text" name="mem_no" value="${authvo.no}">
+					<input type="hidden" name="mem_no" value="${authvo.no}">
 					<input type = "hidden" name = "a" value="reply">
 					<table class="tbl-ex">
 						<tr>
@@ -32,10 +32,10 @@
 					<div class="bottom">
 						<a href="/mysite02/board">취소</a>
 						<input type="submit" value="등록">
-							글번호: <input type="text" name="no" value="${content.no}"><br>
-							그룹번호: <input type="text" name="g_no" value="${content.groupNo}"><br>
-							오더번호: <input type="text" name="o_no" value="${content.orderNo}"><br>
-							깊이: <input type="text" name="depth" value="${content.depth}"><br>
+							<input type="hidden" name="no" value="${content.no}"><br>
+							<input type="hidden" name="g_no" value="${content.groupNo}"><br>
+							<input type="hidden" name="o_no" value="${content.orderNo}"><br>
+							<input type="hidden" name="depth" value="${content.depth}"><br>
 					</div>
 				</form>				
 			</div>
