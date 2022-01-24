@@ -84,11 +84,11 @@
 				<div class="bottom">
 				<!-- 답글 달기 -->
 					<c:if test="${null ne authvo}">
-						<a href="${pageContext.request.contextPath}/board?a=replyform&no=${content.no}">답글달기</a>
+						<a href="${pageContext.request.contextPath}/board/reply/${content.no}">답글달기</a>
 					</c:if>
 					<a href="${pageContext.request.contextPath}/board">글목록</a>
 					<c:if test="${content.userVo.no eq authvo.no}">
-						<a href="${pageContext.request.contextPath}/board?a=modifyform&no=${content.no}">글수정</a>
+						<a href="${pageContext.request.contextPath}/board/update?no=${content.no}">글수정</a>
 					</c:if>
 				</div>
 			</div>

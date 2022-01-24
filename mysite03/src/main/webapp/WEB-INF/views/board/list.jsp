@@ -15,7 +15,6 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="${pageContext.request.contextPath}/board" method="GET">
-					<input type="hidden" name="a" value="search">
 					<input type="text" id="kwd" name="input" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -34,13 +33,13 @@
 						<c:choose>
 							<c:when test="${1 eq vo.depth}">
 								<td style="text-align:left;padding-left:0">
-									<a href="/mysite02/board?a=viewform&board_sn=${vo.no}">${vo.title}</a>
+									<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}">${vo.title}</a>
 								</td>	
 							</c:when>
 							
 							<c:otherwise>
 							<td style="text-align:left;padding-left:${20*vo.depth}px">
-								<a href="/mysite02/board?a=viewform&board_sn=${vo.no}">
+								<a href="${pageContext.request.contextPath}/board/view?no=${vo.no}">
 									<img id="profile" style="text-align:left;width:20px" src="${pageContext.servletContext.contextPath}/assets/images/arrow.png">
 									${vo.title}
 								</a>
@@ -78,7 +77,7 @@
 				</div>
 				<c:if test="${null ne authvo}">
 					<div class="bottom">
-						<a href="/mysite02/board/write" id="new-book">글쓰기</a>
+						<a href="${pageContext.servletContext.contextPath}/board/write" id="new-book">글쓰기</a>
 					</div>
 				</c:if>				
 			</div>

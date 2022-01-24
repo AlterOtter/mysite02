@@ -14,8 +14,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
-					<input type="hidden" name="a" value="modify">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board/update">
 					<input type="hidden" name="no" value="${param.no}">
 					<table class="tbl-ex">
 						<tr>
@@ -23,13 +22,13 @@
 						</tr>
 						<tr>
 							<td class="label">제목</td>
-							<td><input type="text" name="title" value="${contents.title}"></td>
+							<td><input type="text" name="title" value="${content.title}"></td>
 						</tr>
 						<tr>
 							<td class="label">내용</td>
 							<td>
 								<% pageContext.setAttribute("newLine", "\n"); %>
-								<textarea id="content" name="content">${fn:replace(contents.contents,newLine,"<br/>")}</textarea>
+								<textarea id="content" name="contents">${fn:replace(content.contents,newLine,"<br/>")}</textarea>
 							</td>
 						</tr>
 					</table>

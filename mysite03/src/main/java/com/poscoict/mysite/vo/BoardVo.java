@@ -3,8 +3,9 @@ package com.poscoict.mysite.vo;
 import com.poscoict.mysite.vo.UserVo.Builder;
 
 import lombok.Data;
+import lombok.ToString;
 
-
+@ToString
 public class BoardVo {
 	private Integer no=0;
 	private String title;
@@ -16,7 +17,11 @@ public class BoardVo {
 	private String regDate;
 	private UserVo userVo;
 	private String userName;
-	public int getNo() {
+	
+	public BoardVo() {
+		// TODO Auto-generated constructor stub
+	}
+	public Integer getNo() {
 		return no;
 	}
 	public void setNo(Integer no) {
@@ -34,25 +39,25 @@ public class BoardVo {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getHit() {
+	public Integer getHit() {
 		return hit;
 	}
 	public void setHit(Integer hit) {
 		this.hit = hit;
 	}
-	public int getGroupNo() {
+	public Integer getGroupNo() {
 		return groupNo;
 	}
 	public void setGroupNo(Integer groupNo) {
 		this.groupNo = groupNo;
 	}
-	public int getOrderNo() {
+	public Integer getOrderNo() {
 		return orderNo;
 	}
 	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
 	}
-	public int getDepth() {
+	public Integer getDepth() {
 		return depth;
 	}
 	public void setDepth(Integer depth) {
@@ -112,7 +117,7 @@ public class BoardVo {
             this.contents="없음";
         }
         
-        public Builder no(int no){
+        public Builder no(Integer no){
             this.no = no;
             return this;
         }

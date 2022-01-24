@@ -11,9 +11,8 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
-					<input type="hidden" name="mem_no" value="${authvo.no}">
-					<input type = "hidden" name = "a" value="reply">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board/reply">
+					<input type="text" name="mem_no" value="${authvo.no}">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -25,16 +24,16 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="contents" name="contents"></textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
 						<a href="/mysite02/board">취소</a>
 						<input type="submit" value="등록">
-							<input type="hidden" name="no" value="${content.no}"><br>
-							<input type="hidden" name="g_no" value="${content.groupNo}"><br>
-							<input type="hidden" name="o_no" value="${content.orderNo}"><br>
+							<input type="text" name="no" value="${content.no}"><br>
+							<input type="text" name="groupNo" value="${content.groupNo}"><br>
+							<input type="text" name="orderNo" value="${content.orderNo}"><br>
 							<input type="hidden" name="depth" value="${content.depth}"><br>
 					</div>
 				</form>				
