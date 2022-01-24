@@ -18,4 +18,19 @@ public class CommService {
 
 		model.addAttribute("comments", new CommDao().SelectList(vo));
 	}
+
+	public boolean insert(CommVo vo) {
+		if(vo==null) throw new RuntimeException("댓글 삽입 실패");
+		
+		commdao.insertComment(vo);
+		
+		return true;
+	}
+
+	public boolean delete(Integer no) {
+		if(no==null)throw new RuntimeException("삭제 실패");
+		
+		commdao.DeleteOne(no);
+		return true;
+	}
 }

@@ -10,6 +10,10 @@ public class CommVo {
     private String comm_date;
     private String mem_nm;
 
+    public CommVo() {
+		// TODO Auto-generated constructor stub
+	}
+    
 	public String getMem_nm() {
 		return mem_nm;
 	}

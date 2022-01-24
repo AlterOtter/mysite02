@@ -59,7 +59,7 @@
 						<c:if test="${null ne authvo}">
 							<c:set var="no" value="${authvo.no}"/>
 							<c:if test="${vo.comm_mem_sn eq authvo.no}">
-								<td><a href="${pageContext.servletContext.contextPath}/board?a=deletecomment&no=${vo.comm_sn}&bd_sn=${param.board_sn}" class="del"  style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
+								<td><a href="${pageContext.servletContext.contextPath}/board/deletecomm?no=${vo.comm_sn}&bd_sn=${param.no}" class="del"  style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
 							</c:if>
 						</c:if>
 					</tr>
@@ -71,11 +71,10 @@
 						
 						</c:when>
 						<c:otherwise>
-							<form action="${pageContext.request.contextPath}/board">
-							<input type="hidden" name="a" value="writecomment">
-							<input type="hidden" name="no" value="${param.board_sn}">
-							<input type="hidden" name="mem_sn" value="${authvo.no}">
-							<input type="text" name="comment">
+							<form action="${pageContext.request.contextPath}/board/writecomm" method="POST">
+							<input type="hidden" name="comm_bd_sn" value="${param.no}">
+							<input type="hidden" name="comm_mem_sn" value="${authvo.no}">
+							<input type="text" name="comm_content">
 							<input type="submit">
 							</form>
 						</c:otherwise>

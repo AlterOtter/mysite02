@@ -14,6 +14,7 @@ import com.poscoict.mysite.repository.BoardDao;
 import com.poscoict.mysite.service.BoardService;
 import com.poscoict.mysite.service.CommService;
 import com.poscoict.mysite.vo.BoardVo;
+import com.poscoict.mysite.vo.CommVo;
 import com.poscoict.mysite.vo.UserVo;
 
 @Controller
@@ -108,6 +109,19 @@ public class BoardController {
 
 		
 		return "redirect:/board";
+	}
+	@RequestMapping(value="/writecomm",method=RequestMethod.POST)
+	public String wirteCommnet(CommVo vo) {
+		commservice.insert(vo);
+		
+		return "redirect:/board/view?no="+vo.getComm_bd_sn();
+	}
+	
+	@RequestMapping(value="/deletecomm",method=RequestMethod.GET)
+	public String deltecomm(@RequestParam(value="no",required = true) Integer no,
+			@RequestParam(value="bd_sn",required = true) Integer bd_sn) {
+		commservice.delete(no);
+		return "redirect:/board/view?no="+bd_sn.toString();
 	}
 
 	
