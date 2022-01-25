@@ -5,7 +5,6 @@ import com.poscoict.mysite.vo.UserVo.Builder;
 import lombok.Data;
 import lombok.ToString;
 
-@ToString
 public class BoardVo {
 	private Integer no=0;
 	private String title;
@@ -16,6 +15,15 @@ public class BoardVo {
 	private Integer depth;
 	private String regDate;
 	private UserVo userVo;
+	private Integer user_no;
+	
+	public Integer getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(Integer user_no) {
+		this.user_no = user_no;
+	}
+
 	private String userName;
 	
 	public BoardVo() {

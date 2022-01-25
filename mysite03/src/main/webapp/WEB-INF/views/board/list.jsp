@@ -51,7 +51,7 @@
 						<td>${vo.regDate}</td>
 						<c:if test="${null ne authvo}">
 							<c:set var="no" value="${authvo.no}"/>
-							<c:if test="${vo.userVo.no eq authvo.no}">
+							<c:if test="${vo.user_no eq authvo.no}">
 								<td><a href="${pageContext.servletContext.contextPath}/board/delete/${vo.no}" class="del"  style='background-image: url("${pageContext.servletContext.contextPath }/assets/images/recycle.png")'>삭제</a></td>
 							</c:if>
 						</c:if>

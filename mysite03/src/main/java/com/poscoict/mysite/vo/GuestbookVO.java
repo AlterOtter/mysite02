@@ -12,6 +12,8 @@ public class GuestbookVO {
 		// TODO Auto-generated constructor stub
 	}
     
+ 
+    
 
 	public void setNo(Integer no) {
 		this.no = no;

@@ -16,7 +16,7 @@ public class CommService {
 	public void getComm(Integer no,Model model) {
 		CommVo vo = CommVo.builder().comm_bd_sn(no).build();
 
-		model.addAttribute("comments", new CommDao().SelectList(vo));
+		model.addAttribute("comments", commdao.SelectList(vo));
 	}
 
 	public boolean insert(CommVo vo) {

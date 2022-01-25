@@ -14,8 +14,7 @@
      	<c:import url="/WEB-INF/views/include/header.jsp"/>
       <div id="content">
          <div id="guestbook">
-            <form action="/mysite02/guest" method="POST">
-               <input type="hidden" name="a" value="insert">
+            <form action="/mysite03/guest/insert" method="POST">
                <table>
                   <tr>
                      <td>이름</td><td><input type="text" name="name" value="${authvo.name}"></td>

@@ -15,7 +15,7 @@ public class GuestService {
 	private Guest_dao guest_dao; 
 	
 	public List<GuestbookVO> getlist() {
-		return guest_dao.select();
+		return guest_dao.select2();
 	}
 
 	public boolean delete(GuestbookVO vo) {
@@ -24,8 +24,13 @@ public class GuestService {
 			throw new RuntimeException("Check Board No  or  Password");
 		}
 		
+		return guest_dao.delete2(vo);
+	}
+	
+	public boolean insert(GuestbookVO vo) {
 		
-		return guest_dao.delete(vo);
+		
+		return guest_dao.insert2(vo);
 	}
 	
 }

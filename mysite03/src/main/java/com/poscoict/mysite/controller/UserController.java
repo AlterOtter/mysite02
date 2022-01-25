@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -84,17 +85,17 @@ public class UserController {
 	
 	@RequestMapping("/join")
 	public String UserJoin(UserVo vo,HttpSession session) {
-		try {
-			boolean result = userservice.join(vo);
-			if(result) return "user/joinform";
-			return "user/joinsuccess";
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return "user/joinform";
-		}
-		
-
+		userservice.join(vo);
+		return "user/joinsuccess";
 	}
 	
 	//=================================END JOIN============================================
+	
+//	@ExceptionHandler(Exception.class)
+//	public String exception() {
+//		return "error/exception";
+//	}
+
+	
+	
 }

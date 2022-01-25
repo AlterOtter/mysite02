@@ -1,6 +1,10 @@
 package com.poscoict.mysite.service;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,10 +41,9 @@ public class BoardService {
 			model.addAttribute("page", page);
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		
+			e.printStackTrace();
 		}
+		return false;
 		
 	}
 	
@@ -50,34 +53,35 @@ public class BoardService {
 		
 		if(page==null)throw new RuntimeException("page error");
 		
-		return boarddao.SelectList(page);
+	
+		return boarddao.SelectList2(page);
 	}
 
-	public Object seacrhCotentcount(String input) {
+	public Integer seacrhCotentcount(String input) {
 		
 		if(input.isEmpty()||input.isBlank())input="";
 		
-		return new BoardDao().searchCount(input);
+		return boarddao.searchCount2(input);
 	}
 
 	public List<String> pageCount() {
 		
-		return  new BoardDao().pageCount();
+		return  boarddao.pageCount2();
 	}
 
 	public List<BoardVo> searchList(String input,Integer page) {
 
 		
-		return new BoardDao().SerachList(input,page);
+		return boarddao.SearchList2(input,page);
 	}
 
 	public Integer searchCount(String input) {
-		return new BoardDao().searchCount(input);
+		return boarddao.searchCount2(input);
 	}
 
 	public List<String> searchPageCount(String input) {
 	
-		return new BoardDao().searchpageCount(input);
+		return boarddao.searchpageCount2(input);
 	}
 
 
@@ -87,7 +91,7 @@ public class BoardService {
 	public boolean delete(Integer no) {
 		if(no==null)throw new RuntimeException("게시물 삭제 실패");
 		
-		boarddao.DeleteOne(no);
+		boarddao.DeleteOne2(no);
 		return false;
 	}
 	// ======================================END Delete List================================================
@@ -98,7 +102,7 @@ public class BoardService {
 		int o_no=1;
 		int depth=1;
 		int hit =1;
-		Integer group_num = (new BoardDao()).MaxGroupCount()+1;
+		Integer group_num = (boarddao).MaxGroupCount2()+1;
 		BoardVo insetvo = BoardVo.builder()
 				.title(vo.getTitle())
 				.contents(vo.getContents())
@@ -110,32 +114,33 @@ public class BoardService {
 						.build())
 				.build();
 		
-		return new BoardDao().insertNewContent(insetvo);
+		return boarddao.insertNewContent2(insetvo);
 	}
 	// ======================================Write List================================================
 	
 	public boolean getContents(Integer no, Model model) {
-		model.addAttribute("content", boarddao.readContent(no));
+		boarddao.addViewCount2(no);
+		model.addAttribute("content", boarddao.readContent2(no));
 		return true;
 	}
 	
 	public void update(BoardVo vo) {
 		if(vo==null||vo.getNo()==null) throw new RuntimeException(" 오류 발생 번호 확인");
 		
-		boarddao.updateOne(vo);
+		boarddao.updateOne2(vo);
 	}
 
 	public void writeReply(BoardVo vo) {
 		if(vo.getOrderNo()==null||vo.getGroupNo()==null)throw new RuntimeException("Cant find Order no and Group no");
 		vo.setDepth(vo.getDepth()+1);
 		vo.setOrderNo(vo.getOrderNo()+1);
-		List<BoardVo> o_list = new BoardDao().GetOrderList(vo);
+		List<BoardVo> o_list = boarddao.GetOrderList2(vo);
 		
 		for(BoardVo temp:o_list) {
-			new BoardDao().AddorderCount(temp.getNo());
+			boarddao.AddorderCount2(temp.getNo());
 		}
 		
-		new BoardDao().insertReplyContent(vo);
+		boarddao.insertReplyContent2(vo);
 	
 	}
 	

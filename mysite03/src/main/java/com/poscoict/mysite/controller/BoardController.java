@@ -1,10 +1,12 @@
 package com.poscoict.mysite.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,8 +66,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/view",method = RequestMethod.GET)
-	public String view(@RequestParam(value="no",required = true)Integer no,Model model) {
-		try {
+	public String view(@RequestParam(value="no",required = true)Integer no,@CookieValue(value="read" ,required =false)Cookie cookie,Model model) {
+		try {	
 			boardservice.getContents(no,model);
 			commservice.getComm(no, model);
 			return "board/view";
@@ -105,6 +107,7 @@ public class BoardController {
 			boardservice.writeReply(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/board";
 		}
 
 		
@@ -112,16 +115,29 @@ public class BoardController {
 	}
 	@RequestMapping(value="/writecomm",method=RequestMethod.POST)
 	public String wirteCommnet(CommVo vo) {
-		commservice.insert(vo);
+		try {
+			commservice.insert(vo);
+			return "redirect:/board/view?no="+vo.getComm_bd_sn();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/board";
+
+		}
 		
-		return "redirect:/board/view?no="+vo.getComm_bd_sn();
+		
 	}
 	
 	@RequestMapping(value="/deletecomm",method=RequestMethod.GET)
 	public String deltecomm(@RequestParam(value="no",required = true) Integer no,
 			@RequestParam(value="bd_sn",required = true) Integer bd_sn) {
-		commservice.delete(no);
-		return "redirect:/board/view?no="+bd_sn.toString();
+		try {
+			commservice.delete(no);
+			return "redirect:/board/view?no="+bd_sn.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/board";
+		}
+		
 	}
 
 	

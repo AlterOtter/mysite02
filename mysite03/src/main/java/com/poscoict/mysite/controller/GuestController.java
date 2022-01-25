@@ -48,4 +48,17 @@ public class GuestController {
 		
 	}
 	//====================================END List============================================
+	
+	@RequestMapping(value ="/insert",method = RequestMethod.POST)
+	public String insert(GuestbookVO vo) {
+		try {
+			boolean result=guestservice.insert(vo);
+			return "redirect:/guest";
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "redirect:/guest";
+		}
+		
+	}
+	
 }

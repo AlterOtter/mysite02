@@ -3,6 +3,7 @@ package com.poscoict.mysite.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poscoict.mysite.exception.UserRepositoryException;
 import com.poscoict.mysite.repository.UserDao;
 import com.poscoict.mysite.vo.UserVo;
 
@@ -19,7 +20,9 @@ public class UserService {
 		}
 		
 		
-		return userdao.login(vo);
+		/*return userdao.login(vo);*/
+		
+		return userdao.findByEmailAndPassword2(vo.getEmail(),vo.getPassword());
 	}
 
 	public boolean updateService(UserVo vo) {
@@ -47,12 +50,10 @@ public class UserService {
 		return userdao.findByNo(vo.getNo());
 	}
 
-	public boolean join(UserVo vo) {
-		if(vo==null||vo.getEmail()==null||vo.getPassword()==null||vo.getGender()==null) {
+	public boolean join(UserVo vo) throws UserRepositoryException {
+		if(vo==null||vo.getEmail().isBlank()||vo.getPassword().isBlank()||vo.getGender().isBlank()) {
 			throw new RuntimeException("회원 가입 실패 ! 입력값 오류 !"+vo.toString());
 		}
-		
-		userdao.insert(vo);
 		
 		return userdao.insert(vo);
 	}
