@@ -16,8 +16,8 @@
 			<div id="content">
 				<div id="site-introduction">
 					<div style="align-content: center;align-items: center;">
-						<img id="profile" style="width:150px" src="/mysite02/assets/images/mol.png">
-						<img id="profile" style="width:200px" src="/mysite02/assets/images/mollu.png">
+						<img id="profile" style="width:150px" src="${pageContext.request.contextPath}/assets/images/mol.png">
+						<img id="profile" style="width:200px" src="${pageContext.request.contextPath}/assets/images/mollu.png">
 					</div>
 					<h2>안녕하세요. 권순모의  mysite에 오신 것을 환영합니다.</h2>
 					<p>
