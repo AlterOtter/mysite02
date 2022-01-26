@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poscoict.mysite.repository.BoardDao;
+import com.poscoict.mysite.security.Auth;
 import com.poscoict.mysite.service.BoardService;
 import com.poscoict.mysite.service.CommService;
 import com.poscoict.mysite.vo.BoardVo;
@@ -52,12 +53,14 @@ public class BoardController {
 		
 	}
 	
+	@Auth
 	@RequestMapping(value="/write",method = RequestMethod.GET)
 	public String WriteForm() {
 		return "board/write";
 		
 	}
 	
+	@Auth
 	@RequestMapping(value="/write",method = RequestMethod.POST)
 	public String Write(BoardVo vo) {
 		boolean result=boardservice.write(vo);

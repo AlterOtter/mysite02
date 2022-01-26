@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.poscoict.mysite.security.Auth;
 import com.poscoict.mysite.service.UserService;
 import com.poscoict.mysite.vo.UserVo;
 
@@ -24,25 +25,7 @@ public class UserController {
 	public String UserLoginform() {
 		return "user/loginform";
 	}
-	
-	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String Userlogin(UserVo vo,Model model,HttpSession session) {
-		try {
-			UserVo res_vo=userservice.LoginService(vo);
-			
-			session.setAttribute("authvo", res_vo);
-			return "main/index";
-		} catch (Exception e) {
-			model.addAttribute("result", "fail");
-			return "user/loginform";
-		}
-	}
-	
-	@RequestMapping(value="/logout",method = RequestMethod.GET)
-	public String UserLogout(Model model,HttpSession session) {
-		session.invalidate();
-		return "main/index";	
-	}
+
 	//=================================END LOGIN============================================
 	
 	//=================================UPDATE============================================
@@ -60,6 +43,7 @@ public class UserController {
 		}
 	
 	}
+	
 	
 	@RequestMapping("/update")
 	public String UserUpdate(UserVo vo,Model model,HttpSession session) {

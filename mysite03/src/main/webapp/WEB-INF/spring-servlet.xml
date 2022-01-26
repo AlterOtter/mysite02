@@ -10,6 +10,25 @@
    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <mvc:interceptors>
+	   	<mvc:interceptor>
+	   		<mvc:mapping path="/user/auth"/>
+	   		<bean class="com.poscoict.mysite.security.LoginInteceptor"/>
+	   	</mvc:interceptor>
+	   	<mvc:interceptor>
+	   		<mvc:mapping path="/user/logout"/>
+	   		<bean class="com.poscoict.mysite.security.LogoutInterceptor"/>
+	   	</mvc:interceptor>	
+	   	<mvc:interceptor>
+	   		<mvc:mapping path="/**"/>
+	   		<mvc:exclude-mapping path="/user/auth"/>
+	   		<mvc:exclude-mapping path="/user/logout"/>
+	   		<mvc:exclude-mapping path="/assets/**"/>
+	   		<bean class="com.poscoict.mysite.security.AuthInterCeptor"/>
+	   	</mvc:interceptor>	
+   </mvc:interceptors>
+  
    <!-- Message Converter, Handler Mapping,Validator 생성 및 설정 -->
    <mvc:annotation-driven/>
    	
