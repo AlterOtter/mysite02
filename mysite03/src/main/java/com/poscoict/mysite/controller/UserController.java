@@ -29,11 +29,11 @@ public class UserController {
 	public String Userlogin(UserVo vo,Model model,HttpSession session) {
 		try {
 			UserVo res_vo=userservice.LoginService(vo);
+			
 			session.setAttribute("authvo", res_vo);
 			return "main/index";
 		} catch (Exception e) {
 			model.addAttribute("result", "fail");
-			System.out.println(e.getMessage());
 			return "user/loginform";
 		}
 	}

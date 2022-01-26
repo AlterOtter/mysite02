@@ -15,14 +15,17 @@ public class UserService {
 	
 	public UserVo LoginService(UserVo vo) {
 		
-		if(vo==null || vo.getEmail()==null || vo.getPassword()==null) {
+		if(vo==null || vo.getEmail().isBlank() || vo.getPassword().isBlank()) {
 			throw new RuntimeException("Check Your ID or Password");
 		}
 		
+		UserVo res= userdao.findByEmailAndPassword2(vo.getEmail(),vo.getPassword());
 		
-		/*return userdao.login(vo);*/
+		if(res==null) {
+			throw new RuntimeException("Cant find User");
+		}
 		
-		return userdao.findByEmailAndPassword2(vo.getEmail(),vo.getPassword());
+		return res;
 	}
 
 	public boolean updateService(UserVo vo) {
