@@ -611,7 +611,7 @@ public class BoardDao {
 		map.put("g_no", vo.getGroupNo());
 		map.put("o_no", vo.getOrderNo());
 		map.put("depth", vo.getDepth());
-		map.put("user_no", vo.getUserVo().getNo());
+		map.put("user_no", vo.getUser_no());
 		return sqlSession.insert("board.insertReplyContent",map)==1;
 	}
 
@@ -620,7 +620,7 @@ public class BoardDao {
 		map.put("title", vo.getTitle());
 		map.put("contents", vo.getContents());
 		map.put("g_no", vo.getGroupNo());
-		map.put("user_no", vo.getUserVo().getNo());
+		map.put("user_no", vo.getUser_no());
 		return sqlSession.insert("board.insertNewContent",map)==1;
 	}
 	

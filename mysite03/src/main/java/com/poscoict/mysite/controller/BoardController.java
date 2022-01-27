@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poscoict.mysite.repository.BoardDao;
 import com.poscoict.mysite.security.Auth;
+import com.poscoict.mysite.security.AuthUser;
 import com.poscoict.mysite.service.BoardService;
 import com.poscoict.mysite.service.CommService;
 import com.poscoict.mysite.vo.BoardVo;
@@ -62,7 +63,9 @@ public class BoardController {
 	
 	@Auth
 	@RequestMapping(value="/write",method = RequestMethod.POST)
-	public String Write(BoardVo vo) {
+	public String Write(BoardVo vo,@AuthUser UserVo authvo) {
+		vo.setUser_no(authvo.getNo());
+		
 		boolean result=boardservice.write(vo);
 		
 		return "redirect:/board";
@@ -100,7 +103,8 @@ public class BoardController {
 		boardservice.getContents(no, model);
 		return "board/reply";
 	}
-	
+	/*
+	@Auth
 	@RequestMapping(value="/reply",method=RequestMethod.POST)
 	public String reply(BoardVo vo,HttpSession session,Model model) {
 		try {
@@ -116,6 +120,24 @@ public class BoardController {
 		
 		return "redirect:/board";
 	}
+	*/
+	
+	@Auth
+	@RequestMapping(value="/reply",method=RequestMethod.POST)
+	public String reply(BoardVo vo,@AuthUser UserVo authvo,Model model) {
+		try {
+			vo.setUser_no(authvo.getNo());
+			boardservice.writeReply(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/board";
+		}
+
+		
+		return "redirect:/board";
+	}
+	
+	
 	@RequestMapping(value="/writecomm",method=RequestMethod.POST)
 	public String wirteCommnet(CommVo vo) {
 		try {

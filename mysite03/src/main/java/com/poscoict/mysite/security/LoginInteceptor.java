@@ -32,6 +32,7 @@ public class LoginInteceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authvo", vo);
+		System.out.println(vo.toString());
 		response.sendRedirect(request.getContextPath());
 	
 		return false;

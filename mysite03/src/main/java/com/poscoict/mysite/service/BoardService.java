@@ -91,6 +91,7 @@ public class BoardService {
 	public boolean delete(Integer no) {
 		if(no==null)throw new RuntimeException("게시물 삭제 실패");
 		
+		
 		boarddao.DeleteOne2(no);
 		return false;
 	}
@@ -103,18 +104,15 @@ public class BoardService {
 		int depth=1;
 		int hit =1;
 		Integer group_num = (boarddao).MaxGroupCount2()+1;
-		BoardVo insetvo = BoardVo.builder()
+		BoardVo insertvo = BoardVo.builder()
 				.title(vo.getTitle())
 				.contents(vo.getContents())
 				.groupNo(group_num)
 				.orderNo(o_no).depth(depth)
 				.hit(hit)
-				.userVo(UserVo.builder()
-						.no(vo.getNo())
-						.build())
 				.build();
-		
-		return boarddao.insertNewContent2(insetvo);
+		insertvo.setUser_no(vo.getUser_no());
+		return boarddao.insertNewContent2(insertvo);
 	}
 	// ======================================Write List================================================
 	

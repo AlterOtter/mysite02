@@ -10,6 +10,14 @@
    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		<!-- <aop:aspectj-autoproxy />-->
+	<!-- Message Converter, Handler Mapping, Validator 생성 및 설정 -->
+ 	<mvc:annotation-driven>
+	    <mvc:argument-resolvers>
+	        <bean class="com.poscoict.mysite.security.AuthUserHandlerMethodArgumentResolver"/>     
+	    </mvc:argument-resolvers>
+	</mvc:annotation-driven>
+    
     
     <mvc:interceptors>
 	   	<mvc:interceptor>
@@ -29,8 +37,6 @@
 	   	</mvc:interceptor>	
    </mvc:interceptors>
   
-   <!-- Message Converter, Handler Mapping,Validator 생성 및 설정 -->
-   <mvc:annotation-driven/>
    	
    	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet의 위임(delegate) Handler -->
    <mvc:default-servlet-handler/>

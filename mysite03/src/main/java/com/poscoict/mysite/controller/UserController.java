@@ -5,11 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.poscoict.mysite.security.Auth;
+import com.poscoict.mysite.security.AuthUser;
 import com.poscoict.mysite.service.UserService;
 import com.poscoict.mysite.vo.UserVo;
 
@@ -30,11 +30,12 @@ public class UserController {
 	
 	//=================================UPDATE============================================
 	
+	@Auth
 	@RequestMapping(value ="/updateform",method=RequestMethod.GET)
-	public String UserUpdateform(Model model,HttpSession session) {
+	public String UserUpdateform(@AuthUser UserVo authvo,Model model) {
 		try {
-			UserVo vo=(UserVo)session.getAttribute("authvo");
-			UserVo InfoVo=userservice.updateFormInfo(vo);
+			System.out.println(authvo.toString());
+			UserVo InfoVo=userservice.updateFormInfo(authvo);
 			model.addAttribute("userInfo", InfoVo);
 			return "user/updateform";
 		} catch (Exception e) {
@@ -44,10 +45,11 @@ public class UserController {
 	
 	}
 	
-	
+	@Auth
 	@RequestMapping("/update")
-	public String UserUpdate(UserVo vo,Model model,HttpSession session) {
+	public String UserUpdate(@AuthUser UserVo authvo,UserVo vo,Model model,HttpSession session) {
 		try {
+			System.out.println(vo.toString());
 			boolean res_vo = userservice.updateService(vo);
 			if(res_vo) return "user/updateform";
 			session.setAttribute("authvo", vo);

@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserVo {
 	Integer no;
 	String name;
@@ -13,10 +16,6 @@ public class UserVo {
 	String email;
 	String gender;
 	String join_date;
-	
-	public UserVo() {
-		// TODO Auto-generated constructor stub
-	}
 	
 
 	public Integer getNo() {
