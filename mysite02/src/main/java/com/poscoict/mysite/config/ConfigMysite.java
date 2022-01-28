@@ -6,3 +6,4 @@ public class ConfigMysite {
 	public static final String USER = "webdb";
 	public static final String PASSWORD = "webdb";
 }
+//clean package tomcat:redeploy
