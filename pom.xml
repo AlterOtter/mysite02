@@ -5,14 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
-  <!-- <module>mysite03</module>-->	
+  	<module>mysite02</module>
   	<module>mysite03</module>
   </modules>
   
   
   <properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-		<project.reporting.outputEncodnig>utf-8</project.reporting.outputEncodnig>
+	<project.reporting.outputEncodnig>utf-8</project.reporting.outputEncodnig>
 	</properties>
 
 	<dependencies>
