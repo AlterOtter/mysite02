@@ -15,7 +15,9 @@
 	<!-- Connection Pool DataSource -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<!--<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />-->
 		<property name="url" value="jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+		<!-- 192.168.0.73:3307//webdb -->
 		<property name="username" value="webdb" />
 		<property name="password" value="webdb" />
 	</bean>

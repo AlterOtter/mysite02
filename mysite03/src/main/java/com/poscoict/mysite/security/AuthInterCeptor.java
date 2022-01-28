@@ -28,6 +28,7 @@ public class AuthInterCeptor  extends HandlerInterceptorAdapter{
 		//4. Handler Method @Auth 가 없다면 Type에 있는지 확인(과제)
 		if(auth == null) {
 //			Auth classauth=handlerMethod.getBeanType().getAnnotation(Auth.class);
+	
 //			if(classauth==null) {
 //				return false;
 //			}
