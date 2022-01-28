@@ -9,7 +9,7 @@ public class ConnectionDB {
 	public static Connection connect() {
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); 
+			Class.forName("org.mariadb.jdbc.Driver"); 
 			String url = ConfigMysite.URL;
 			String user =  ConfigMysite.USER;
 			String passwd =  ConfigMysite.PASSWORD;
