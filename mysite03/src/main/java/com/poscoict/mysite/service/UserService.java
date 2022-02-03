@@ -24,6 +24,7 @@ public class UserService {
 		if(res==null) {
 			throw new RuntimeException("Cant find User");
 		}
+		System.out.println(res.getRole());
 		
 		return res;
 	}

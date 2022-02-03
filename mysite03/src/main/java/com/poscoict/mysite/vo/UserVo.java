@@ -1,5 +1,11 @@
 package com.poscoict.mysite.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +17,20 @@ import lombok.ToString;
 @NoArgsConstructor
 public class UserVo {
 	Integer no;
+	
+	@NotEmpty
+	@Length(min =2,max = 10)
 	String name;
 	String password;
+	
+//	@Pattern(regexp = " ^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")
+	@Length(min=4,max=40)
+	@NotEmpty
+	@Email
 	String email;
 	String gender;
 	String join_date;
-	
+	String role;
 
 	public Integer getNo() {
 		return no;
@@ -76,7 +90,15 @@ public class UserVo {
 	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
+	
+    public String getRole() {
+		return role;
+	}
 
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	private UserVo(Builder builder){
         this.no=builder.no;
@@ -85,6 +107,7 @@ public class UserVo {
         this.email=builder.email;
         this.join_date=builder.join_date;
         this.gender=builder.gender;
+        this.role =builder.role;
   
     }
 
@@ -93,13 +116,16 @@ public class UserVo {
         return new Builder();
     } 
 
-    public static class Builder{
+
+
+	public static class Builder{
     	Integer no;
     	String name;
     	String password;
     	String email;
     	String gender;
     	String join_date;
+    	String role;
 	    
         public Builder(){
             this.name="없음";
@@ -131,6 +157,11 @@ public class UserVo {
             this.join_date =join_date;
             return this;
         }
+        public Builder role(String role){
+            this.role =role;
+            return this;
+        }
+      
       
         
         public UserVo build(){

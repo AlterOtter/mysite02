@@ -1,10 +1,16 @@
 package com.poscoict.mysite.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -65,14 +71,28 @@ public class UserController {
 	
 	//=================================JOIN============================================
 	@RequestMapping(value="/join",method=RequestMethod.GET)
-	public String UserJoinform() {
+	public String UserJoinform(@ModelAttribute UserVo vo) {
 		return "user/joinform";
 	}
 	
 	@RequestMapping("/join")
-	public String UserJoin(UserVo vo,HttpSession session) {
+	public String UserJoin(@ModelAttribute @Valid UserVo vo,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+//			List<ObjectError> list = result.getAllErrors();
+//			for(ObjectError error:list) {
+//				System.out.println(error);
+//			}
+			
+//			model.addAttribute("userVo",vo);
+			model.addAllAttributes(result.getModel());
+			return "user/joinform";
+		}
+			
+		
 		userservice.join(vo);
-		return "user/joinsuccess";
+		return "user/joinsuccess";	
+		
+		
 	}
 	
 	//=================================END JOIN============================================

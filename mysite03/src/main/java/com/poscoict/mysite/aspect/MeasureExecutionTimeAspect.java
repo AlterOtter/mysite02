@@ -24,8 +24,8 @@ public class MeasureExecutionTimeAspect {
  		String taskName = className+"."+methodName;
  		
  		Long totalTime = sw.getTotalTimeMillis();
- 		System.out.println("[Execution Time]["+taskName+"]"+totalTime+"millis");
-		System.out.println("total time : "+totalTime.toString());
+// 		System.out.println("[Execution Time]["+taskName+"]"+totalTime+"millis");
+//		System.out.println("total time : "+totalTime.toString());
 		return result;
 	}
 }

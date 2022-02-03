@@ -8,7 +8,7 @@
 	    	text-decoration-line: none;
 	    }
 		</style>		
-			<h1><a href="${pageContext.request.contextPath}/main">MySite</a></h1>
+			<h1><a href="${pageContext.request.contextPath}/main">${siteVo.title}</a></h1>
 			<ul>
 				<c:choose>
 					<c:when test="${empty authvo}">

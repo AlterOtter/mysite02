@@ -31,9 +31,9 @@
 					<div class="bottom">
 						<a href="/mysite02/board">취소</a>
 						<input type="submit" value="등록">
-							<input type="text" name="no" value="${content.no}"><br>
-							<input type="text" name="groupNo" value="${content.groupNo}"><br>
-							<input type="text" name="orderNo" value="${content.orderNo}"><br>
+							<input type="hidden" name="no" value="${content.no}"><br>
+							<input type="hidden" name="groupNo" value="${content.groupNo}"><br>
+							<input type="hidden" name="orderNo" value="${content.orderNo}"><br>
 							<input type="hidden" name="depth" value="${content.depth}"><br>
 					</div>
 				</form>				
