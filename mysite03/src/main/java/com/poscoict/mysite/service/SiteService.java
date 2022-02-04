@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,9 @@ public class SiteService {
 	
 	@Autowired
 	private SiteDao sitedao;
+	
+	@Autowired
+	private ServletContext servletcontext;
 	
 	private String SAVE_PATH="/upload-images";
 	private String URL_BASE="/images";
@@ -58,15 +63,12 @@ public class SiteService {
 			updateMainInfo(vo);
 		}
 		
+		servletcontext.setAttribute("siteVo", sitedao.getSiteInfo());
 		
 		return true;
 	}
 
 
-	
-	
-	
-	
 	
 	//
 	//파일 저장 함수
