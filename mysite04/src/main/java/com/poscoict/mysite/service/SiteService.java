@@ -67,7 +67,7 @@ public class SiteService {
 	
 	public boolean update(SiteVo vo, MultipartFile multipartFile) {
 		try {
-			if(multipartFile !=null)
+			if(multipartFile !=null&& !multipartFile.isEmpty())
 				update_MainPicture(multipartFile);
 			
 			

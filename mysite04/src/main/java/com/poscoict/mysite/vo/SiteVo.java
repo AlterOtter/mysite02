@@ -1,7 +1,11 @@
 package com.poscoict.mysite.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class SiteVo {
 	private Integer no;
@@ -9,6 +13,7 @@ public class SiteVo {
 	private String welcome;
 	private String profile;
 	private String description;
+	
 	
 	public Integer getNo() {
 		return no;
