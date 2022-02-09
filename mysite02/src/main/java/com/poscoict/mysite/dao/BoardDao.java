@@ -11,7 +11,6 @@ import com.poscoict.mysite.vo.BoardVo;
 import com.poscoict.mysite.vo.GuestbookVO;
 import com.poscoict.mysite.vo.UserVo;
 
-
 public class BoardDao {
 	
 	public List<BoardVo> SelectList(int pagenum) {
