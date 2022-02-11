@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	<select id = "getTotalCount" parameterType="string" resultType="boardvo">
+		<choose>
+			<when test="_parameter ==null or ''==_parameter">
+			<![CDATA[
+				select count(*) from board
+			]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					select count(*) from board where title like '%${_parameter}%' or like '%${_parameter}%'
+				]]>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id = "selectList" parameterType="Integer" resultType="boardvo">
+			<![CDATA[
+				select b.no as 'no',b.title as 'title',u.name as 'userName' ,b.reg_date as 'regDate',g_no as groupNo,o_no as orderNo,depth,hit,user_no  from board as b join user as u on b.user_no=u.no order by g_no,o_no limit #{page},10
+			]]>
+	</select>
+	
+	<select id = "SearchList" parameterType="map" resultType="boardvo">
+			<![CDATA[
+				select b.no as 'no',b.title as 'title',u.name as 'userName' ,b.reg_date as 'regDate',g_no as groupNo,o_no as orderNo,depth,hit,user_no  from board as b join user as u on b.user_no=u.no where b.title like  '%${input}%' or contents like '%${input}%' order by g_no,o_no limit #{page},10
+			]]>
+	</select>
+	<update id="updateone"  parameterType="boardvo" >
+		<![CDATA[
+			UPDATE `webdb`.`board` SET `title` = #{title}, `contents` = #{contents} WHERE (`no` = #{no});
+		]]>
+	</update>
+	
+	<select id="searchCount" parameterType="map" resultType="Integer">
+		<![CDATA[
+				select count(*) as count from board where title like '%${input}%' or contents like '%${input}%'
+			]]>
+	</select>
+	
+	<update id="addViewCount"  parameterType="Integer" >
+		<![CDATA[
+			update board as bd set bd.hit=IFNULL(bd.hit,0)+1 where no =#{no}
+		]]>
+	</update>
+	<delete id="deleteone" parameterType="Integer">
+	<![CDATA[
+		DELETE FROM board WHERE (no = #{no})
+	]]>
+	</delete>
+	<update id ="AddorderCount" parameterType="Integer">
+	<![CDATA[
+		UPDATE `webdb`.`board` SET `o_no` = o_no+1 WHERE (`no` = #{no});
+	]]>
+	</update>
+	<select id="GetOrderList" parameterType="BoardVo" resultType="boardvo" >
+	<![CDATA[
+		select no,title,contents,hit,g_no as groupNo,o_no as orderNo, depth,reg_date as regDate,user_no as user_no from board where o_no>=#{orderNo} and g_no=#{groupNo}
+	]]>
+	</select>
+	<insert id="insertReplyContent" parameterType="map">
+	<![CDATA[
+		INSERT INTO board (`title`, `contents`, `g_no`, `o_no`, `depth`, `reg_date`, `user_no`) VALUES (#{title}, #{contents}, #{g_no}, #{o_no}, #{depth}, now(), #{user_no})
+	]]>
+	</insert>
+	<insert id="insertNewContent" parameterType="map">
+	<![CDATA[
+		INSERT INTO `webdb`.`board` (`title`, `contents`, `g_no`, `o_no`, `depth`, `reg_date`, `user_no`) VALUES (#{title}, #{contents}, #{g_no}, 1, 1, now(), #{user_no})
+	]]>
+	</insert>
+	<select id="MaxGroupCount" resultType="Integer">
+	<![CDATA[
+		select ifnull(max(g_no),0) as max from board
+	]]>
+	</select>
+	<select id="readContent" parameterType="Integer" resultType="boardvo">
+	<![CDATA[
+		select no,title,contents,hit,g_no as groupNo,o_no as orderNo, depth,reg_date as regDate,user_no as user_no from board where no=#{no}
+	]]>
+	</select>
+	<select id="pageCount" resultType="Integer">
+	<![CDATA[
+		select count(*) as count from board
+	]]>	
+	</select>
+</mapper>

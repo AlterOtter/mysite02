@@ -12,7 +12,7 @@ import com.poscoict.config.web.SecurityConfig;
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan({"com.poscoict.mysite.service", "com.poscoict.mysite.repository", "com.poscoict.mysite.aspect"})
-@Import({DBConfig.class,MyBatisConfig.class,SecurityConfig.class})
+@Import({DBConfig.class,MyBatisConfig.class})
 public class AppConfig {
-	
+
 }
