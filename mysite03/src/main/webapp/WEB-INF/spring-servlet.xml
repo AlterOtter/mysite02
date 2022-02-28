@@ -13,6 +13,42 @@
 	<!-- <aop:aspectj-autoproxy />-->
 	<!-- Message Converter, Handler Mapping, Validator 생성 및 설정 -->
  	<mvc:annotation-driven>
+ 		 		<mvc:message-converters>
+	  <!-- html(text) message converter -->
+ 			 <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	 			 <property name="supportedMediaTypes">
+	 			 	<list>
+	 			 		<value>text/html;charset=UTF-8</value>
+	 			 	</list>
+	 			 </property>
+ 			  </bean>
+    <!-- XML messgage converter -->   
+ 			  <!-- 
+ 			  	1. Marchaling
+ 			 		: 데이터 (object)를 xml로 만드는 것
+ 			  	2. Unmarchaling
+ 			 		: xml 데이터를 데이터 형태(Object)로 만드는것
+ 			 	3. java 지원
+ 			 		1)OXM ( Object Xml Mapping)
+ 			 			- XML 데이터와 객체를 매핑
+ 			 			- MarshalingHttpMessageConverter
+ 			 		2)JAXV 
+ 			 			- OXM를 쉽게 도와주는 TOOL
+ 			 			- 마샬링/언마샬링을 Annotation 기반으로 한다.
+ 			 			- JAXBAnnotation(@XMLElementRoot)를 사용해서 직관적으로 매핑한다
+ 			 			- jaxb2rootElementHttpConverter
+ 			   -->
+ 			  <!-- JSON message converter -->
+ 			  
+ 			 <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	 			 <property name="supportedMediaTypes">
+	 			 	<list>
+	 			 		<value>application/json; charset=UTF-8</value>
+	 			 	</list>
+	 			 </property>
+ 			 </bean>
+ 		</mvc:message-converters>
+ 		<!-- argument resolver -->
 	    <mvc:argument-resolvers>
 	        <bean class="com.poscoict.mysite.security.AuthUserHandlerMethodArgumentResolver"/>     
 	    </mvc:argument-resolvers>

@@ -7,6 +7,87 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/jquery/jquery-3.6.0.js"></script>
+<script>
+$(function(){
+	$("#join-form").submit(function(event){
+		event.preventDefault();
+		//이름이 비어 있는지 확인
+		
+		//이름의 유효성 체크
+		if($("#name").val()===''){
+			alert('이름이 비어 있습니다');
+			$("#name").focus();
+			return;
+		}
+		
+		//email 유효성 체크 (Empty 체크)
+		if($("#email").val()===''){
+			alert('이메일이 비어 있습니다');
+			$("#email").focus();
+			return;
+		}
+		
+		console.log($("#btn-checkemail").css('display'));
+		
+		// 중복체크 여부 
+		if($("#btn-checkemail").css('display')==='inline-block'){
+			alert('중복체크를 안 하였습니다.');
+			$("#email").focus();
+			return;
+		}
+		
+		//비밀번호 유효성(empty) 체크
+		if($("#password").val()===''){
+			alert('비밀번호가 비어있습니다.');
+			$("#password").focus();
+			return;
+		}
+		
+		console.log("ok");
+		//유효성 ok
+		$("#join-form")[0].submit();
+	});
+	
+	
+	
+ 	$("#btn-checkemail").click(function(){
+		 var email = $("#email").val();
+	 	 if(email==''){
+			 return;
+	 	}
+	 
+	 
+	$.ajax({
+		url:"${pageContext.request.contextPath}/user/api/checkmail?email="+email,
+		type:"get",
+		dataType:"json",
+		success:function(res){
+			if(res.result !== 'success'){
+				console.error(res);
+				return;
+			}
+			
+			if(res.data){
+				alert("존재하는 이메일 입니다. 다른 이메일을 사용해 주세요");
+				$("#email").val('').focus();
+				return;
+			}
+			
+			$("#img-checkemail").show();
+			$("#btn-checkemail").hide();
+			
+			
+		},
+		error:function(xhr,status,res){
+			console.error(status,res);
+		}
+	});
+ })
+	
+})
+
+</script>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="<%=request.getContextPath() %>/assets/css/user.css" rel="stylesheet" type="text/css">
@@ -35,7 +116,8 @@
 					</p>
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
-					<input type="button" value="id 중복체크">
+					<input type="button" id="btn-checkemail"value="id 중복체크">
+					<img src="${pageContext.request.contextPath }/assets/images/check.png"  id="img-checkemail"hidden="hidden" style="width:14px"/>
 					<p style="text-align:left; padding-left:0; color:#f00">
 						<form:errors path="email" />
 					</p>	

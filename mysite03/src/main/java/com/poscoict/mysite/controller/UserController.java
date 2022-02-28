@@ -75,7 +75,7 @@ public class UserController {
 		return "user/joinform";
 	}
 	
-	@RequestMapping("/join")
+	@RequestMapping(value="/join",method=RequestMethod.POST)
 	public String UserJoin(@ModelAttribute @Valid UserVo vo,BindingResult result,Model model) {
 		if(result.hasErrors()) {
 //			List<ObjectError> list = result.getAllErrors();
