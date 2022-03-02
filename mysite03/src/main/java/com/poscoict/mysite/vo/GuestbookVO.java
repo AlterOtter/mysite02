@@ -1,6 +1,8 @@
 package com.poscoict.mysite.vo;
 
+import lombok.ToString;
 
+@ToString
 public class GuestbookVO {
 	private Integer no;
     private String name;
@@ -11,7 +13,7 @@ public class GuestbookVO {
     public GuestbookVO() {
 		// TODO Auto-generated constructor stub
 	}
-    
+
  
     
 

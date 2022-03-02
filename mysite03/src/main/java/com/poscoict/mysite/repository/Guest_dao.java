@@ -132,8 +132,6 @@ public class Guest_dao {
 	}
 
 	public boolean insert2(GuestbookVO vo) {
-		sqlSession.insert("guest.Insert",vo);
-		System.out.println(vo.getNo());
 		
 		return sqlSession.insert("guest.Insert",vo)==1;
 	}
@@ -141,5 +139,7 @@ public class Guest_dao {
 	public boolean delete2(GuestbookVO vo) {
 		return sqlSession.insert("guest.delete",vo)==1;
 	}
+	
+
 	
 }

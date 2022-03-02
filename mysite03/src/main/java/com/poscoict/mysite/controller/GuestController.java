@@ -19,6 +19,13 @@ public class GuestController {
 	@Autowired
 	private GuestService guestservice;
 	
+	
+	@RequestMapping("/spa")
+	public String spa() {
+		return "guestbook/index-spa";
+	}
+	
+	
 	//==================================== List============================================
 	@RequestMapping(value ="",method = RequestMethod.GET)
 	public String GuestList(Model model) {
