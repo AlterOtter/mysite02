@@ -61,4 +61,9 @@ public class UserService {
 		
 		return userdao.insert(vo);
 	}
+	
+	public UserVo checkemail(String email) {
+		
+		return userdao.findByEmail(email);
+	}
 }
