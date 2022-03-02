@@ -43,9 +43,9 @@ public class GuestbookController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/list2")
-	public JsonResult getlist2() {
-		List<GuestbookVO> list = guestservice.getlist();
+	@GetMapping("/list2/{no}")
+	public JsonResult getlist2(@PathVariable(value="no", required = false)Integer no ) {
+		List<GuestbookVO> list = guestservice.getlist(no);
 		return JsonResult.success(list);
 	}
 	
@@ -53,7 +53,8 @@ public class GuestbookController {
 	@DeleteMapping("/delete/{no}")
 	public JsonResult deleteOne(@PathVariable(value="no")Integer no,@RequestParam(value = "password") String password) {
 		if(guestservice.delete(GuestbookVO.builder().no(no).password(password).build())) {
-			System.out.println("성공!");
+			System.out.println(password);
+			System.out.println(no);
 			return JsonResult.success(no);
 		}else {
 			return JsonResult.fail(no.toString());

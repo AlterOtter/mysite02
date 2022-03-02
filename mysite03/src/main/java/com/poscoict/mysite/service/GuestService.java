@@ -17,6 +17,10 @@ public class GuestService {
 	public List<GuestbookVO> getlist() {
 		return guest_dao.select2();
 	}
+	
+	public List<GuestbookVO> getlist(Integer no) {
+		return guest_dao.selectlimit(no);
+	}
 
 	public boolean delete(GuestbookVO vo) {
 		

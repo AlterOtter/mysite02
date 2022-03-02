@@ -12,6 +12,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+var start= -1;
 var render = function(vo){
 	var html=
 	"<li data-no="+vo.no+">"+
@@ -27,7 +28,7 @@ var render = function(vo){
 //var getlist = function(start_num)
 $(function(){
 	$.ajax({
-		url:"${pageContext.request.contextPath}/guestbook/api/list2",
+		url:"${pageContext.request.contextPath}/guestbook/api/list2/"+start,
 		type:"get",
 		dataType:"json",
 		contentType:"application/json",
@@ -35,6 +36,7 @@ $(function(){
 			
 			var html='';
 			res.data.forEach(function(vo){
+				start=vo.no;
 				html+=render(vo);				
 			});
 			
@@ -58,7 +60,26 @@ $(window).scroll(function(){
 	var scrollTop=$window.scrollTop();
 	
 	if(scrollTop + windowHeight == documentHight){
-		console.log("fetch");
+		$.ajax({
+			url:"${pageContext.request.contextPath}/guestbook/api/list2/"+start,
+			type:"get",
+			dataType:"json",
+			contentType:"application/json",
+			success:function(res){
+				
+				var html='';
+				res.data.forEach(function(vo){
+					start=vo.no;
+					html+=render(vo);				
+				});
+				
+				$("#list-guestbook").append(html);
+				return;
+			},
+			error:function(xhr,status,res){
+				return;
+			}
+		});
 	}
  });
  
@@ -69,7 +90,7 @@ $(function(){
 		buttons:{
 			"삭제":function(){
 				var no = $("#hidden-no").val();
-				var password=$("#input-password").val();
+				var password=$("#password-delete").val();
 		
 				var url = "${pageContext.request.contextPath}/guestbook/api/delete/"+no;
 				
@@ -80,7 +101,15 @@ $(function(){
 					contentType:"application/x-www-form-urlencoded",
 					data:$.param({password}),
 					success:function(res){
-						console.log(res)						
+						if(res.result==='success'){
+							$("#list-guestbook li[data-no='"+res.data + "']").remove();
+							dialogDelete.dialog('close');
+							return;
+						}else{
+							$(".validateTips.error").show();
+							$("#password-delete").val("").focus();
+							return;
+						}		
 					},
 					error:function(xhr,status,res){
 						console.log(res);
@@ -92,9 +121,14 @@ $(function(){
 			"취소":function(){
 				$("#password-delete").val("");
 				$("hidden-no").val("");
-				$(".validateTips error").hide();
+				$(".validateTips.error").hide();
 				$("#dialog-delete-form").dialog('close');
 			}
+		},
+		close:function(){
+			$("#password-delete").val("");
+			$("hidden-no").val("");
+			$(".validateTips error").hide();
 		}
 	});
 	

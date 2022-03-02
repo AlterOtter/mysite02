@@ -7,7 +7,16 @@
 		select * from guestbook;
 		]]>
 	</select>
-	
+	<select id="selectinit" parameterType="long" resultType="guestvo">
+		<![CDATA[
+			select * from guestbook order by no desc limit 0,5;
+		]]>
+	</select>
+	<select id="selectlimit" parameterType="long" resultType="guestvo">
+		<![CDATA[
+			select * from guestbook where no < #{no} order by no desc limit 0,5;
+		]]>
+	</select>
 	<insert id="Insert" parameterType="guestvo">
 		<![CDATA[
 			insert

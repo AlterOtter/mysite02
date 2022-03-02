@@ -18,112 +18,10 @@ import com.poscoict.mysite.vo.GuestbookVO;
 @Repository
 public class Guest_dao {
 	
-	@Autowired
-	private DataSource datasource;
+
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public boolean insert(GuestbookVO vo) {
-		boolean result = true;
-		Connection conn = null;
-		PreparedStatement pstmt=null;
-		try {
-			conn = datasource.getConnection();
-			pstmt = conn.prepareStatement("INSERT INTO `webdb`.`guestbook` (`name`, `password`, `message`, `reg_date`) VALUES (?, ?, ?, now());");
-			pstmt.setString(1,vo.getName());
-			pstmt.setString(2,vo.getPassword());
-			pstmt.setString(3,vo.getMessage());
-			pstmt.executeUpdate();			
-		}catch(SQLException e){
-			result = false;
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
-	
-	
-
-	public List<GuestbookVO> select() {
-		List<GuestbookVO> volist = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement pstmt=null;
-		try {
-			conn = datasource.getConnection();
-			pstmt = conn.prepareStatement("select * from guestbook order by no desc;");
-			ResultSet rs=pstmt.executeQuery();	
-			while(rs.next()) {
-				GuestbookVO vo = GuestbookVO.builder()
-						.no(rs.getInt("no"))
-						.name(rs.getString("name"))
-						.password(rs.getString("password"))
-						.message(rs.getString("message"))
-						.reg_date(rs.getString("reg_date"))
-						.build();
-				volist.add(vo);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return volist;
-	}
-	
-	public boolean delete(GuestbookVO vo) {
-		boolean result = true;
-		Connection conn = null;
-		PreparedStatement pstmt=null;
-		try {
-			conn = datasource.getConnection();
-			pstmt = conn.prepareStatement("DELETE FROM `webdb`.`guestbook` WHERE (`no` = ? and `password`=?);");
-			pstmt.setInt(1, vo.getNo());
-			pstmt.setString(2, vo.getPassword());
-			pstmt.executeUpdate();	
-			
-		}catch(SQLException e){
-			result =false;
-			e.printStackTrace();
-		}finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
 
 
 
@@ -138,6 +36,15 @@ public class Guest_dao {
 	
 	public boolean delete2(GuestbookVO vo) {
 		return sqlSession.insert("guest.delete",vo)==1;
+	}
+	
+	public List<GuestbookVO> selectlimit(Integer no){
+		if(no == null||no == -1 ) {
+			return sqlSession.selectList("guest.selectinit");
+			
+		}else {
+			return sqlSession.selectList("guest.selectlimit",no);
+		}
 	}
 	
 
