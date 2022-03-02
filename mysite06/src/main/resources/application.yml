@@ -3,32 +3,38 @@
 #message
 spring:
    messages:
-      always-message-format: true
-      basename: messages/message_ko
-      encoding: UTF-8
-   devtools:    livereload:      enabled: true
-   mvc:    view:      prefix: /WEB-INF/views/ 
-      suffix: .jsp    http:      encoding:      charset: utf-8
-      enabled: true
-      force-request: false
-      force: false
-   datasource:      driver-class-name: com.mysql.cj.jdbc.Driver      url: jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC
-      username: webdb
-      password: webdb
-      initalSize: 10
-      maxActive: 20
-      hikari:         minimum-idle: 10
-         maximum-pool-size: 20
-   servlet:      multipart:         enabled: true
+       always-message-format: true
+       basename: messages/messages_ko
+       encoding: UTF-8
+   devtools:       livereload:           enabled: true
+   mvc:    view:       prefix: /WEB-INF/views/ 
+       suffix: .jsp    http:       encoding:       charset: utf-8
+       enabled: true
+       force-request: false
+       force: false
+   datasource:       driver-class-name: com.mysql.cj.jdbc.Driver       url: jdbc:mysql://localhost:3306/webdb?characterEncoding=UTF-8&serverTimezone=UTC
+       username: webdb
+       password: webdb
+       initalSize: 10
+       maxActive: 20
+       hikari:           minimum-idle: 10
+           maximum-pool-size: 20
+   servlet:       multipart:         enabled: true
          max-file-size: 50MB
          max-request-size: 50MB
-   aop:      proxy-target-class: true
-      auto: true
-logging:  config: classpath:logback.xml
+   aop:       proxy-target-class: true
+       auto: true
+logging:    config: classpath:logback.xml
   
-mybatis:  config-location: classpath:mybatis/configuration.xml
+mybatis:    config-location: classpath:mybatis/configuration.xml
 # server
 server:  port: 8080
   servlet:    context-path: /mysite06
+    encoding:        charset: utf-8
+        enabled: true
+        force: false
+        force-request: false
+        force-response: false 
+      
     
    
