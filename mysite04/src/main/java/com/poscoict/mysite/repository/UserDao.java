@@ -233,5 +233,9 @@ public class UserDao {
 		return sqlSession.selectOne("user.findByEmailAndPassword", map);
 	}	
 
+	public UserVo findByEmail(String email) {
+		
+		return sqlSession.selectOne("user.findByEmail",email);
+	}	
 	
 }
